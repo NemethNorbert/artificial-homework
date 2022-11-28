@@ -6,7 +6,7 @@ import "./App.css";
 
 function App() {
   const [decodedMap, setDecodedMap] = useState();
-  const [highestSoulCount, setHighestSoulCount] = useState();
+  const [result, setResult] = useState();
   const [error, setError] = useState(null);
 
   function fileUpload(event) {
@@ -15,34 +15,22 @@ function App() {
     if (file) {
       const reader = new FileReader();
       reader.onload = function (event) {
-        const result = event.target.result.trim();
-        if (decoderUtil.mapIsValid(result)) {
-          let squareMatrixLength = Math.sqrt(result.length);
-          // check if map does not have a missing peace
-          if (squareMatrixLength % 1 === 0) {
-            const decodedScroll = decoderUtil.decodeScroll(result);
+        const sequence = event.target.result.trim();
+        if (decoderUtil.mapIsValid(sequence)) {
+          const decodedScroll = decoderUtil.decodeScroll(sequence);
 
-            const spiralMap = decoderUtil.formSpiralMatrix(
-              decodedScroll.reverse(),
-              decoderUtil.createSquareMatrix(squareMatrixLength)
-            );
+          decoderUtil.fillSequence(decodedScroll);
 
-            const [soulCount, matrixMap] =
-              decoderUtil.getMPopulatedWithMap(spiralMap);
+          const spiralMap = decoderUtil.formSpiralMatrix(
+            decodedScroll.reverse(),
+            decoderUtil.createSquareMatrix(Math.sqrt(decodedScroll.length))
+          );
 
-            setDecodedMap(matrixMap);
-            setHighestSoulCount(soulCount);
-          } else {
-            setError({
-              message:
-                "Your map has a missing peace, make sure to bring the whole map!",
-              resetErrorBoundary: () => {
-                setError(null);
-                setDecodedMap(null);
-                setHighestSoulCount(null);
-              },
-            });
-          }
+          const [result, matrixMap] =
+            decoderUtil.getMPopulatedWithMap(spiralMap);
+
+          setDecodedMap(matrixMap);
+          setResult(result);
         } else {
           setError({
             message:
@@ -50,7 +38,7 @@ function App() {
             resetErrorBoundary: () => {
               setError(null);
               setDecodedMap(null);
-              setHighestSoulCount(null);
+              setResult(null);
             },
           });
         }
@@ -87,7 +75,7 @@ function App() {
             {decodedMap ? (
               <ResultMatrixDisplay
                 matrix={decodedMap}
-                title={highestSoulCount}
+                title={result}
                 focusSelector={'span[style="color: green;"]'}
                 customCss={"overflow-x-auto overflow-y-auto max-h-96"}
               />

@@ -118,10 +118,22 @@ function getMPopulatedWithMap(matrix) {
 
   return [highestSoulCount, display];
 }
+function nearestCeilSq(n) {
+  return Math.pow(Math.ceil(Math.sqrt(n)), 2);
+}
+
+function fillSequence(sequence) {
+  const remainingTiles = nearestCeilSq(sequence.length) - sequence.length;
+  if (remainingTiles) {
+    for (let i = 0; i < remainingTiles; i++) {
+      sequence.push(water);
+    }
+  }
+}
 
 function decodeScroll(scroll) {
   let counter = 0;
-  let decodedScroll = [...scroll].map((tile) => {
+  let sequence = [...scroll].map((tile) => {
     if (tile === water) {
       counter++;
       return water;
@@ -134,8 +146,7 @@ function decodeScroll(scroll) {
       return result;
     }
   });
-
-  return decodedScroll;
+  return sequence;
 }
 
 function createSquareMatrix(length) {
@@ -205,4 +216,6 @@ export default {
   createSquareMatrix,
   formSpiralMatrix,
   mapIsValid,
+  fillSequence,
+  nearestCeilSq,
 };
