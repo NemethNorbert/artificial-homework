@@ -5,8 +5,8 @@ import decoderUtil from "./utils/decoderUtil";
 import "./App.css";
 
 function App() {
-  const [decodedMap, setDecodedMap] = useState([]);
-  const [highestSoulCount, setHighestSoulCount] = useState([]);
+  const [decodedMap, setDecodedMap] = useState();
+  const [highestSoulCount, setHighestSoulCount] = useState();
   const [error, setError] = useState(null);
 
   function fileUpload(event) {
@@ -84,12 +84,14 @@ function App() {
             </label>
           </div>
           <div className="result">
-            <ResultMatrixDisplay
-              matrix={decodedMap}
-              title={highestSoulCount}
-              focusSelector={'span[style="color: green;"]'}
-              customCss={"overflow-x-auto overflow-y-auto max-h-96"}
-            />
+            {decodedMap ? (
+              <ResultMatrixDisplay
+                matrix={decodedMap}
+                title={highestSoulCount}
+                focusSelector={'span[style="color: green;"]'}
+                customCss={"overflow-x-auto overflow-y-auto max-h-96"}
+              />
+            ) : null}
           </div>
         </>
       )}
