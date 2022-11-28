@@ -15,7 +15,7 @@ function App() {
     if (file) {
       const reader = new FileReader();
       reader.onload = function (event) {
-        const result = event.target.result;
+        const result = event.target.result.trim();
         if (decoderUtil.mapIsValid(result)) {
           let squareMatrixLength = Math.sqrt(result.length);
           // check if map does not have a missing peace
