@@ -60,7 +60,7 @@ test("mapIsValid retrun false if sequence holds anything else than ~ and #", () 
   expect(decoderUtil.mapIsValid(wrongSequence3)).toBe(false);
 });
 
-test("getDecodedMap returns a number and a matrix that does not hold undefined", () => {
+test("getMPopulatedWithMap returns a number and a matrix that does not hold undefined", () => {
   const mockupSequence = decoderUtil.decodeScroll("#~~~##~~#~~###~#~~##~#~#~");
   const matrixLength = Math.sqrt(mockupSequence.length);
   const mockupSquareMatrix = decoderUtil.createSquareMatrix(matrixLength);
@@ -68,7 +68,7 @@ test("getDecodedMap returns a number and a matrix that does not hold undefined",
     mockupSequence,
     mockupSquareMatrix
   );
-  const [value, matrix] = decoderUtil.getDecodedMap(mockupSpiralMatrix);
+  const [value, matrix] = decoderUtil.getMPopulatedWithMap(mockupSpiralMatrix);
 
   expect(typeof value === "number").toBe(true);
   matrix.map((row) => {

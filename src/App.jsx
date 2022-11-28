@@ -27,10 +27,10 @@ function App() {
               decoderUtil.createSquareMatrix(squareMatrixLength)
             );
 
-            const [soulCount, displayMatrix] =
-              decoderUtil.getDecodedMap(spiralMap);
+            const [soulCount, matrixMap] =
+              decoderUtil.getMPopulatedWithMap(spiralMap);
 
-            setDecodedMap(displayMatrix);
+            setDecodedMap(matrixMap);
             setHighestSoulCount(soulCount);
           } else {
             setError({

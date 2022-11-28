@@ -1,6 +1,6 @@
 const water = "~";
 
-function getDecodedMap(matrix) {
+function getMPopulatedWithMap(matrix) {
   const ROW = matrix[0].length;
   const COL = matrix.length;
   const water = "~";
@@ -200,7 +200,7 @@ function mapIsValid(str) {
 }
 
 export default {
-  getDecodedMap,
+  getMPopulatedWithMap,
   decodeScroll,
   createSquareMatrix,
   formSpiralMatrix,
