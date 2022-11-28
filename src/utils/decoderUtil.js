@@ -129,7 +129,7 @@ function decodeScroll(scroll) {
       counter = 0;
       return water;
     } else {
-      let result = counter;
+      let result = counter % 10;
       counter = 0;
       return result;
     }
