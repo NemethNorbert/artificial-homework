@@ -1,6 +1,6 @@
 import { useState } from "react";
 import ErrorFallback from "./components/ErrorFallback";
-import ResultDisplay from "./components/ResultDisplay";
+import ResultMatrixDisplay from "./components/ResultMatrixDisplay";
 import decoderUtil from "./utils/decoderUtil";
 import "./App.css";
 
@@ -84,9 +84,11 @@ function App() {
             </label>
           </div>
           <div className="result">
-            <ResultDisplay
+            <ResultMatrixDisplay
               matrix={decodedMap}
-              highestSoulCount={highestSoulCount}
+              title={highestSoulCount}
+              focusSelector={'span[style="color: green;"]'}
+              customCss={"overflow-x-auto overflow-y-auto max-h-96"}
             />
           </div>
         </>
