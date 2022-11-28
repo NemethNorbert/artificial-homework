@@ -1,7 +1,14 @@
 import { useEffect, useRef, Fragment } from "react";
 import RenderRow from "./RenderRow";
+import Spinner from "./Spinner";
 
-export default function ResultMatrixDisplay({ title, matrix, focusSelector, customCss }) {
+export default function ResultMatrixDisplay({
+  title,
+  matrix,
+  focusSelector,
+  customCss,
+  loading,
+}) {
   const didMountRef = useRef(false);
 
   if (focusSelector) {
@@ -21,7 +28,8 @@ export default function ResultMatrixDisplay({ title, matrix, focusSelector, cust
   return (
     <>
       <h1>{title}</h1>
-      <div className={customCss? customCss : ""}>
+      <div className={"overlayContainer " + (customCss ? customCss : "")}>
+        {loading ? <Spinner /> : null}
         {matrix?.map((row, key) => {
           return (
             <Fragment key={key}>

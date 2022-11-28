@@ -6,6 +6,7 @@ import "./App.css";
 
 function App() {
   const [decodedMap, setDecodedMap] = useState();
+  const [loading, setLoading] = useState(false);
   const [result, setResult] = useState();
   const [error, setError] = useState(null);
 
@@ -13,6 +14,9 @@ function App() {
     const file = event.target.files[0];
     //TODO check if the scroll is valid
     if (file) {
+      setLoading(true);
+      setDecodedMap(null);
+      setResult(null);
       const reader = new FileReader();
       reader.onload = function (event) {
         const sequence = event.target.result.trim();
@@ -31,6 +35,7 @@ function App() {
 
           setDecodedMap(matrixMap);
           setResult(result);
+          setLoading(false);
         } else {
           setError({
             message:
@@ -39,6 +44,7 @@ function App() {
               setError(null);
               setDecodedMap(null);
               setResult(null);
+              setLoading(false);
             },
           });
         }
@@ -72,16 +78,15 @@ function App() {
             </label>
           </div>
           <div className="result">
-            {decodedMap ? (
-              <ResultMatrixDisplay
-                matrix={decodedMap}
-                title={result}
-                focusSelector={'span[style="color: green;"]'}
-                customCss={
-                  "overflow-x-auto overflow-y-auto max-h-96 matrix-display"
-                }
-              />
-            ) : null}
+            <ResultMatrixDisplay
+              matrix={decodedMap}
+              title={result}
+              focusSelector={'span[style="color: green;"]'}
+              customCss={
+                "overflow-x-auto overflow-y-auto max-h-96 matrix-display"
+              }
+              loading={loading}
+            />
           </div>
         </>
       )}
