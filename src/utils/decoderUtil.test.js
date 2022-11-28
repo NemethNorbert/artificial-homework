@@ -21,11 +21,15 @@ test("decodeScroll logic check", () => {
   const oneSequence = "~##";
   const zeroSequence = "~~~~~~~~~~#";
   const zeroFollowIslandSequence = "~~~~~~~~~~#~#";
+  const elevenSequence = "~~~~~~~~~~~#~~~~";
   expect(decoderUtil.decodeScroll(threeSequence).join("")).toBe("~~~3");
   expect(decoderUtil.decodeScroll(oneSequence).join("")).toBe("~1~");
   expect(decoderUtil.decodeScroll(zeroSequence).join("")).toBe("~~~~~~~~~~~");
   expect(decoderUtil.decodeScroll(zeroFollowIslandSequence).join("")).toBe(
     "~~~~~~~~~~~~1"
+  );
+  expect(decoderUtil.decodeScroll(elevenSequence).join("")).toBe(
+    "~~~~~~~~~~~1~~~~"
   );
 });
 
