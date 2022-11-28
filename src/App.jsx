@@ -77,7 +77,9 @@ function App() {
                 matrix={decodedMap}
                 title={result}
                 focusSelector={'span[style="color: green;"]'}
-                customCss={"overflow-x-auto overflow-y-auto max-h-96"}
+                customCss={
+                  "overflow-x-auto overflow-y-auto max-h-96 matrix-display"
+                }
               />
             ) : null}
           </div>

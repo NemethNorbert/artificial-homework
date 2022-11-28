@@ -8,3 +8,7 @@
 .result {
   color: greenyellow;
 }
+
+.matrix-display {
+  font-family: monospace;
+}
